@@ -152,7 +152,7 @@
 //        with it.
 //      * If the callback throws, reject() the generated future with the thrown
 //        value, even if the value is not an Error.
-//      * If the return value is any other kind, use it as the "value" for
+//      * If the return value is any other kind, use it as the "result" for
 //        resolving the generated Future.
 //
 //    TODO(slightlyoff): updated example logic
@@ -247,7 +247,7 @@ module events {
   };
 
   interface ResolverCallbacks {
-    void accept(optional any value) raises(Error); // AlreadyResolved
+    void accept(optional any result) raises(Error); // AlreadyResolved
     void reject(optional any error) raises(Error); // AlreadyResolved
     void cancel()                   raises(Error); // AlreadyResolved
     void timeout()                  raises(Error); // AlreadyResolved
@@ -265,7 +265,7 @@ module events {
     //   accept
     //     Bubbles: No
     //     Cancelable: No
-    //     Context Info: value
+    //     Context Info: result
     //
     //   reject
     //     Bubbles: No
@@ -277,7 +277,7 @@ module events {
     // Additionally, since a future's state should not be modifiable by
     // consumers, any attempt to use dispatchEvent must throw an error.
 
-    attribute readonly any         value;
+    attribute readonly any         result;
     attribute readonly any         error;
     attribute readonly FutureState state;
 
